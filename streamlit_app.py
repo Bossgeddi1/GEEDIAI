@@ -1,37 +1,43 @@
-import streamlit as st
+import requests
+import base64
+import time
+import json
 
-# 1. Dejinta guud (Page Config)
-st.set_page_config(page_title="GEEDI SPORTS", layout="centered")
+class YacineTV:
 
-# 2. Naqshadda (CSS)
-st.markdown("""
-    <style>
-    .stApp { background-color: #0d1117; color: #ffffff; }
-    div.stButton > button {
-        background-color: #ffffff !important;
-        color: #ff6600 !important;
-        font-weight: bold !important;
-        width: 100% !important;
-        border-radius: 8px !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
+  api_url = "http://ver3.yacinelive.com"
+  key = "c!xZj+N9&G@Ev@vw"
 
-# 3. Qaybta Tabs-ka (WAA INAY HORDHAC U AHAATAAN)
-tab_tv, tab_scores, tab_jadwal = st.tabs(["📺 LIVE TV", "📊 SCORES", "📅 JADWAL"])
+  def __init__(self):
+    pass
 
-# 4. Content-ka Tabs-ka
-with tab_tv:
-    st.subheader("Dooro Channel-ka:")
-    if st.button("beIN SPORTS AFC 1"):
-        st.write("▶️ Waxaa kuu furmay: beIN SPORTS AFC 1")
-        st.components.v1.iframe("https://iptv-org.github.io/channels/qa/beINSportsAFC1#SD", height=400)
-    
-    if st.button("beIN SPORTS 2 Low"):
-        st.video("http://mhav56789.com:2095/a3028/302858907/23")
+  def decrypt(self, enc, key=key):
+    enc = base64.b64decode(enc.encode("ascii")).decode("ascii")
+    result = ""
+    for i in range(len(enc)):
+      result = result + chr(ord(enc[i]) ^ ord(key[i % len(key)]))
+    return result
 
-with tab_scores:
-    st.components.v1.iframe("https://www.scorebat.com/embed/livescore/", height=500)
+  def req(self, path):
+    r = requests.get(self.api_url + path)
+    timestamp = str(int(time.time()))
+    if "t" in r.headers:
+      timestamp = r.headers["t"]
 
-with tab_jadwal:
-    st.components.v1.iframe("https://www.scorebat.com/embed/", height=500)
+    try:
+      return json.loads(self.decrypt(r.text, key=self.key + timestamp))
+
+    except Exception:
+      return {
+        "success": False,
+        "error": "can't parse json."
+      }
+
+  def get_categories(self):
+    return self.req("/api/categories")
+
+  def get_category_channels(self, category_id):
+    return self.req(f"/api/categories/{str(category_id)}/channels")
+
+  def get_channel(self, channel_id):
+    return self.req(f"/api/channel/{str(channel_id)}")
