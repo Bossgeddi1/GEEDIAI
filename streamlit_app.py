@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Dejinta Guud ee Bogga (Icon-ka Tabs-ka browser-ka)
+# 1. Dejinta Guud ee Bogga
 st.set_page_config(
     page_title="GEEDI SPORTS", 
     page_icon="⚽", 
@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Naqshadda Midabada iyo Qurxinta Icon-ka (Custom CSS)
+# 2. Naqshadda Midabada Casriga ah iyo Badhamada waaweyn ee Yacine TV
 st.markdown("""
     <style>
     .stApp {
@@ -43,6 +43,7 @@ st.markdown("""
         font-size: 16px;
         margin-bottom: 25px;
     }
+    /* Qurxinta badhamada Tabs-ka */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
         justify-content: center;
@@ -68,10 +69,26 @@ st.markdown("""
         color: #0d1117 !important;
         border-color: #ff6600 !important;
     }
-    div[data-baseweb="select"] {
-        background-color: #161b22 !important;
-        border: 1px solid #30363d !important;
-        border-radius: 8px !important;
+    
+    /* BADHAMADA YACINE TV STYLE */
+    div.stButton > button {
+        background-color: #ffffff !important;
+        color: #ff6600 !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        width: 100% !important;
+        height: 55px !important;
+        border-radius: 10px !important;
+        border: 2px solid #30363d !important;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2) !important;
+        text-transform: uppercase !important;
+        transition: all 0.3s ease !important;
+        margin-bottom: -10px !important;
+    }
+    div.stButton > button:hover {
+        background-color: #ff6600 !important;
+        color: #ffffff !important;
+        border-color: #ff6600 !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -82,43 +99,43 @@ st.markdown('<div class="main-title">GEEDI SPORTS</div>', unsafe_allow_html=True
 st.markdown('<div class="sub-title">Nidaamka ugu dhakhsaha badan ee baahinta ciyaaraha iyo natiijooyinka tooska ah</div>', unsafe_allow_html=True)
 
 # 4. QAYBTA ALERT-KA
-st.error("🚨 **ALERT - KULAN CUSPAD:** Caawa waxaa si toos ah u dhexmaraya kooxaha waawayn. Hubi inaad ku xirnaato kanaalada **beIN SPORTS** si aadan u moogin billowga ciyaarta!")
+st.error("🚨 **ALERT - KULAN CUSPAD:** Ciyaarihii ugu dambeeyey ee AFC ayaa hadda toos u socda! Guji badhamada hoose si aad u furto kanaalka baahinta dhabta ah.")
 
 st.write("---")
 
 # 5. Sameynta Badhamada Tabs-ka
 tab_tv, tab_scores, tab_schedule, tab_tips = st.tabs([
-    "📺 LIVE", 
+    "📺 LIVE TV", 
     "📊 SCORES", 
     "📅 KULAMADA", 
     "🔮 CORRECT SCORE"
 ])
 
-# 6. DATA-DA KANAALADA (IPTV)
+# 6. DATA-DA KANAALADA (Halkaan waxaa ku jira link-gaagii cusbaa)
 channels = {
+    "beIN SPORTS AFC 1 (Cusub)": "https://iptv-org.github.io/channels/qa/beINSportsAFC1#SD",
     "beIN SPORTS 1 Low": "http://mhav56789.com:2095/a3028/302858907/22",
     "beIN SPORTS 2 Low": "http://mhav56789.com:2095/a3028/302858907/23",
     "beIN SPORTS 3 Low": "http://mhav56789.com:2095/a3028/302858907/24",
-    "beIN SPORTS 4 Low": "http://mhav56789.com:2095/a3028/302858907/16",
-    "beIN SPORTS 5 Low": "http://mhav56789.com:2095/a3028/302858907/17",
-    "beIN SPORTS 6 Low": "http://mhav56789.com:2095/a3028/302858907/18",
-    "beIN SPORTS 7 Low": "http://mhav56789.com:2095/a3028/302858907/2391",
-    "beIN SPORTS 8 Low": "http://mhav56789.com:2095/a3028/302858907/19",
-    "beIN SPORTS 9 Low": "http://mhav56789.com:2095/a3028/302858907/20",
-    "beIN SPORTS 1Xtra Low": "http://mhav56789.com:2095/a3028/302858907/25",
-    "beIN SPORTS 1 English Low": "http://mhav56789.com:2095/a3028/302858907/26",
-    "beIN SPORTS 1 (512K)": "http://mhav56789.com:2095/a3028/302858907/4905",
-    "beIN SPORTS 2 (512K)": "http://mhav56789.com:2095/a3028/302858907/4906",
-    "beIN SPORTS 3 (512K)": "http://mhav56789.com:2095/a3028/302858907/4907",
-    "beIN SPORTS 4 (512K)": "http://mhav56789.com:2095/a3028/302858907/4898"
+    "beIN SPORTS 4 Low": "http://mhav56789.com:2095/a3028/302858907/16"
 }
 
 # --- TAB 1: TV-GA LIVE-KA AH ---
 with tab_tv:
     st.markdown("<br>", unsafe_allow_html=True)
-    selected_channel = st.selectbox("Dooro kanaalka aad rabto inaad furto:", list(channels.keys()))
-    st.markdown(f"<p style='color: #ff6600; font-weight: bold; font-size: 16px;'>▶️ Hadda Baahinta: {selected_channel}</p>", unsafe_allow_html=True)
-    st.video(channels[selected_channel])
+    st.markdown("<p style='text-align: center; color: #8b949e;'>Guji kanaalka aad rabto inaad daawato:</p>", unsafe_allow_html=True)
+    
+    # Samaynta badhamada taxan
+    for channel_name, link in channels.items():
+        if st.button(f"📺 {channel_name}"):
+            st.markdown(f"<p style='color: #ff6600; font-weight: bold; font-size: 18px; text-align: center; margin-top: 15px;'>▶️ Hadda Waxaa kuu furmaaya: {channel_name}</p>", unsafe_allow_html=True)
+            
+            # Shuruud lagu hubinayo hadda link-ga uu yahay kii github si loogu baahiyo qaab habboon
+            if "github" in link:
+                st.video(link, format="video/mp4")
+            else:
+                st.video(link)
+            st.write("---")
 
 # --- TAB 2: NATIIJOOYINKA (LIVE SCORES) ---
 with tab_scores:
