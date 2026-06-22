@@ -1,7 +1,6 @@
 import streamlit as st
 import requests
 import time
-from streamlit_autorefresh import st_autorefresh
 import streamlit.components.v1 as components
 
 # ================= PAGE CONFIG =================
@@ -11,11 +10,6 @@ st.set_page_config(
     page_icon="⚽",
     layout="wide"
 )
-
-# ================= AUTO REFRESH =================
-
-# App-ku isu cusboonaysiiso daqiiqad kasta (60 seconds)
-st_autorefresh(interval=60000, key="auto_refresh")
 
 # ================= CSS =================
 
@@ -226,6 +220,10 @@ if page == "🏠 Home":
     st.info("⚽ Arsenal vs Chelsea - 20:00")
     st.info("⚽ Barcelona vs Real Madrid - 22:00")
     st.info("⚽ Inter Milan vs Juventus - 21:45")
+    
+    # ===== BUTTON TO REFRESH =====
+    if st.button("🔄 Refresh Live Matches"):
+        st.rerun()
 
 # ================= LIVE TV =================
 
@@ -255,6 +253,10 @@ elif page == "📺 Live TV":
         """, unsafe_allow_html=True)
         
         st.caption(f"📺 Waqtiga dhabta ah: {selected}")
+    
+    # ===== BUTTON TO REFRESH =====
+    if st.button("🔄 Refresh Stream"):
+        st.rerun()
 
 # ================= FIXTURES =================
 
@@ -279,6 +281,10 @@ elif page == "📅 Fixtures":
         st.success("⚽ PSG vs Marseille - 21:00")
         
         st.info("💡 Talo: Ku bedel SPORTSCORE_API_KEY si aad u hesho xogta dhabta ah.")
+    
+    # ===== BUTTON TO REFRESH =====
+    if st.button("🔄 Refresh Fixtures"):
+        st.rerun()
 
 # ================= RESULTS =================
 
@@ -308,6 +314,10 @@ elif page == "🏆 Results":
             away = match.get("away_team", "Unknown")
             score = match.get("score", "0-0")
             st.info(f"{home} {score} {away} - LIVE")
+    
+    # ===== BUTTON TO REFRESH =====
+    if st.button("🔄 Refresh Results"):
+        st.rerun()
 
 # ================= NEWS =================
 
@@ -329,6 +339,10 @@ elif page == "📰 News":
     
     st.markdown("---")
     st.caption("📰 Wararka waxay ku saleysan yihiin ilo lagu kalsoonaan karo.")
+    
+    # ===== BUTTON TO REFRESH =====
+    if st.button("🔄 Refresh News"):
+        st.rerun()
 
 # ================= FOOTER =================
 
