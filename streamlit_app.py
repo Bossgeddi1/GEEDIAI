@@ -1,29 +1,33 @@
 import streamlit as st
 
-st.set_page_config(page_title="GEEDI SPORTS", layout="centered")
+st.set_page_config(
+    page_title="GEEDI SPORTS",
+    layout="wide"
+)
 
-# CSS-ka qurxinta
-st.markdown("""
-    <style>
-    .stApp { background-color: #0d1117; color: #ffffff; }
-    div.stButton > button { 
-        width: 100%; height: 50px; background-color: #ffffff; 
-        color: #ff6600; font-weight: bold; border-radius: 8px; border: 2px solid #ff6600;
-    }
-    </style>
-""", unsafe_allow_html=True)
+st.title("⚽ GEEDI SPORTS LIVE")
 
-st.title("⚽ GEEDI SPORTS")
+st.sidebar.header("Settings")
 
-# Badhamada Tooska ah
-channels = {
-    "beIN SPORTS 1": "https://www.youtube.com/embed/live_stream?channel=UC4477474747",
-    "beIN SPORTS 2": "https://www.youtube.com/embed/live_stream?channel=UC5588383838"
-}
+stream_url = st.sidebar.text_input(
+    "Geli Live Stream URL",
+    placeholder="https://example.com/live.m3u8"
+)
 
-st.write("Dooro kanaalka aad rabto inaad daawato:")
+if stream_url:
+    st.success("Stream loaded")
+    st.video(stream_url)
+else:
+    st.info("Geli URL sharci ah oo live stream ah.")
 
-for name, link in channels.items():
-    if st.button(name):
-        st.subheader(f"▶️ {name}")
-        st.components.v1.iframe(link, height=300, scrolling=False)
+st.markdown("---")
+st.subheader("Sports News")
+
+news = [
+    "Wararka ciyaaraha halkan ku soo bandhig.",
+    "Jadwalka ciyaaraha maanta.",
+    "Natiijooyinka ugu dambeeyay."
+]
+
+for item in news:
+    st.write("•", item)
