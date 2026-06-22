@@ -6,41 +6,70 @@ st.set_page_config(
     layout="wide"
 )
 
+# ================= CSS =================
+
 st.markdown("""
 <style>
-.stApp {
-    background-color:#0d1117;
+
+.stApp{
+    background:#020817;
     color:white;
 }
 
-footer {
-    visibility:hidden;
+section[data-testid="stSidebar"]{
+    background:#111827;
 }
 
-.main-title {
+.main-title{
     text-align:center;
-    font-size:55px;
-    font-weight:bold;
+    font-size:60px;
+    font-weight:800;
     color:white;
 }
 
-.card {
-    background:#161b22;
-    padding:15px;
+.live-box{
+    background:#dc2626;
+    padding:10px;
     border-radius:10px;
-    margin:10px 0;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
 }
+
+.card{
+    background:#111827;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    border:1px solid #1f2937;
+}
+
+.footer{
+    text-align:center;
+    margin-top:50px;
+    color:gray;
+}
+
 </style>
 """, unsafe_allow_html=True)
+
+# ================= SIDEBAR =================
 
 st.sidebar.title("⚽ GEEDI SPORTS")
 
 page = st.sidebar.radio(
     "MENU",
-    ["🏠 Home", "📺 Live TV", "📅 Fixtures", "🏆 Results", "📰 News"]
+    [
+        "🏠 Home",
+        "📺 Live TV",
+        "📅 Fixtures",
+        "🏆 Results",
+        "📰 News"
+    ]
 )
 
-# HOME
+# ================= HOME =================
+
 if page == "🏠 Home":
 
     st.markdown(
@@ -48,28 +77,52 @@ if page == "🏠 Home":
         unsafe_allow_html=True
     )
 
-    st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Soccerball.svg/1024px-Soccerball.svg.png",
-        width=150
+    st.markdown(
+        "<div class='live-box'>🔴 LIVE SPORTS TODAY</div>",
+        unsafe_allow_html=True
     )
 
-    st.success("Ku soo dhawoow GEEDI SPORTS")
-
-    col1, col2, col3 = st.columns(3)
+    col1,col2,col3 = st.columns(3)
 
     with col1:
-        st.metric("Live Matches", "12")
+        st.markdown("""
+        <div class='card'>
+        <h1>12</h1>
+        <p>Live Matches</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("Leagues", "25")
+        st.markdown("""
+        <div class='card'>
+        <h1>25</h1>
+        <p>Leagues</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("Channels", "8")
+        st.markdown("""
+        <div class='card'>
+        <h1>8</h1>
+        <p>Channels</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-# LIVE TV
+    st.markdown("---")
+
+    st.subheader("🔥 Top Matches")
+
+    st.info("⚽ Arsenal vs Chelsea - 20:00")
+
+    st.info("⚽ Barcelona vs Real Madrid - 22:00")
+
+    st.info("⚽ Inter Milan vs Juventus - 21:45")
+
+# ================= LIVE TV =================
+
 elif page == "📺 Live TV":
 
-    st.title("📺 LIVE TV")
+    st.title("📺 Live TV")
 
     channels = {
         "Demo Channel 1":
@@ -86,62 +139,47 @@ elif page == "📺 Live TV":
 
     st.video(channels[selected])
 
-# FIXTURES
+# ================= FIXTURES =================
+
 elif page == "📅 Fixtures":
 
     st.title("📅 Today's Fixtures")
 
-    st.markdown("""
-    <div class='card'>
-    Arsenal vs Chelsea - 20:00
-    </div>
-    """, unsafe_allow_html=True)
+    st.success("⚽ Arsenal vs Chelsea - 20:00")
 
-    st.markdown("""
-    <div class='card'>
-    Barcelona vs Real Madrid - 22:00
-    </div>
-    """, unsafe_allow_html=True)
+    st.success("⚽ Barcelona vs Real Madrid - 22:00")
 
-    st.markdown("""
-    <div class='card'>
-    Inter Milan vs Juventus - 21:45
-    </div>
-    """, unsafe_allow_html=True)
+    st.success("⚽ Inter Milan vs Juventus - 21:45")
 
-# RESULTS
+# ================= RESULTS =================
+
 elif page == "🏆 Results":
 
     st.title("🏆 Latest Results")
 
-    st.markdown("""
-    <div class='card'>
-    Arsenal 2 - 1 Liverpool
-    </div>
-    """, unsafe_allow_html=True)
+    st.warning("Arsenal 2 - 1 Liverpool")
 
-    st.markdown("""
-    <div class='card'>
-    Barcelona 3 - 0 Sevilla
-    </div>
-    """, unsafe_allow_html=True)
+    st.warning("Barcelona 3 - 0 Sevilla")
 
-# NEWS
+    st.warning("Inter Milan 1 - 1 Juventus")
+
+# ================= NEWS =================
+
 elif page == "📰 News":
 
     st.title("📰 Sports News")
 
-    st.markdown("""
-    <div class='card'>
-    Champions League fixtures announced.
-    </div>
-    """, unsafe_allow_html=True)
+    st.info("Champions League fixtures announced.")
 
-    st.markdown("""
-    <div class='card'>
-    Premier League title race heats up.
-    </div>
-    """, unsafe_allow_html=True)
+    st.info("Premier League title race heats up.")
+
+    st.info("Transfer market updates available.")
+
+# ================= FOOTER =================
 
 st.markdown("---")
-st.caption("© 2026 GEEDI SPORTS")
+
+st.markdown(
+    "<div class='footer'>⚽ GEEDI SPORTS © 2026</div>",
+    unsafe_allow_html=True
+)
