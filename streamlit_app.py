@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import time
 import streamlit.components.v1 as components
 
 # ================= PAGE CONFIG =================
@@ -139,11 +138,11 @@ def get_fixtures():
 
 # Waxaad ka heli kartaa links-yo dhab ah: https://xsportbox.com/
 LIVE_STREAMS = {
-    "🏆 Arsenal vs Chelsea (Premier League)": "https://iframe.xsportbox.com/embed/12345",
-    "🏆 Barcelona vs Real Madrid (La Liga)": "https://iframe.xsportbox.com/embed/67890",
-    "🏆 Inter Milan vs Juventus (Serie A)": "https://iframe.xsportbox.com/embed/11111",
-    "🏆 Bayern Munich vs Dortmund (Bundesliga)": "https://iframe.xsportbox.com/embed/22222",
-    "🏆 PSG vs Marseille (Ligue 1)": "https://iframe.xsportbox.com/embed/33333"
+    "🏆 Arsenal vs Chelsea (Premier League)": "https://www.youtube.com/embed/L_rnUJcrX2M",
+    "🏆 Barcelona vs Real Madrid (La Liga)": "https://www.youtube.com/embed/L_rnUJcrX2M",
+    "🏆 Inter Milan vs Juventus (Serie A)": "https://www.youtube.com/embed/L_rnUJcrX2M",
+    "🏆 Bayern Munich vs Dortmund (Bundesliga)": "https://www.youtube.com/embed/L_rnUJcrX2M",
+    "🏆 PSG vs Marseille (Ligue 1)": "https://www.youtube.com/embed/L_rnUJcrX2M"
 }
 
 # ================= SIDEBAR =================
@@ -222,12 +221,12 @@ if page == "🏠 Home":
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.warning("⚠️ Ma jiraan ciyaaro toos ah hadda. Haddii aad rabto inaad aragto ciyaaraha, hubi inaad ku dartay API Key sax ah.")
+        st.warning("⚠️ Ma jiraan ciyaaro toos ah hadda.")
 
     st.markdown("---")
     
-    # Ciyaaro tijaabo ah haddii API uu shaqaynayo
-    st.subheader("🔥 Top Matches (Demo)")
+    # Ciyaaro tijaabo ah
+    st.subheader("🔥 Top Matches")
     st.info("⚽ Arsenal vs Chelsea - 20:00")
     st.info("⚽ Barcelona vs Real Madrid - 22:00")
     st.info("⚽ Inter Milan vs Juventus - 21:45")
@@ -254,14 +253,7 @@ elif page == "📺 Live TV":
     if selected:
         stream_url = LIVE_STREAMS[selected]
         
-        st.markdown(f"""
-        <div class='iframe-container'>
-        <iframe src="{stream_url}" 
-                frameborder="0" 
-                allowfullscreen>
-        </iframe>
-        </div>
-        """, unsafe_allow_html=True)
+        st.video(stream_url)
         
         st.caption(f"📺 Waqtiga dhabta ah: {selected}")
     
@@ -303,7 +295,7 @@ elif page == "🏆 Results":
 
     st.title("🏆 Latest Results")
     
-    # Tijaabo (demo) natiijooyin
+    # Natiijooyin tijaabo ah
     results = [
         {"home": "Arsenal", "score": "2-1", "away": "Liverpool"},
         {"home": "Barcelona", "score": "3-0", "away": "Sevilla"},
@@ -315,7 +307,7 @@ elif page == "🏆 Results":
     for result in results:
         st.warning(f"{result['home']} {result['score']} {result['away']}")
     
-    # Haddii API shaqaynayso, waxaan soo dari karnaa natiijooyin dhab ah
+    # Haddii API shaqaynayso, soo dari natiijooyin dhab ah
     live_matches = get_live_matches()
     if live_matches:
         st.markdown("---")
@@ -336,7 +328,7 @@ elif page == "📰 News":
 
     st.title("📰 Sports News")
     
-    # Waxaan isticmaali karnaa API kale oo bixisa wararka
+    # Warar tijaabo ah
     news_items = [
         "🏆 Champions League fixtures announced for next week.",
         "⚽ Premier League title race heats up between Arsenal and Man City.",
@@ -362,7 +354,7 @@ st.markdown("---")
 st.markdown(
     """
     <div class='footer'>
-    ⚽ GEEDI SPORTS © 2026 | Powered by SportScore API & XSportBox
+    ⚽ GEEDI SPORTS © 2026 | Powered by SportScore API
     </div>
     """,
     unsafe_allow_html=True
