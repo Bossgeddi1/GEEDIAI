@@ -16,29 +16,29 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.stApp{
-    background:#020817;
-    color:white;
+.stApp {
+    background: #020817;
+    color: white;
 }
 
-section[data-testid="stSidebar"]{
-    background:#111827;
+section[data-testid="stSidebar"] {
+    background: #111827;
 }
 
-.main-title{
-    text-align:center;
-    font-size:60px;
-    font-weight:800;
-    color:white;
+.main-title {
+    text-align: center;
+    font-size: 60px;
+    font-weight: 800;
+    color: white;
 }
 
-.live-box{
-    background:#dc2626;
-    padding:10px;
-    border-radius:10px;
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:20px;
+.live-box {
+    background: #dc2626;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
     animation: pulse 2s infinite;
 }
 
@@ -48,42 +48,53 @@ section[data-testid="stSidebar"]{
     100% { opacity: 1; }
 }
 
-.card{
-    background:#111827;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
-    border:1px solid #1f2937;
+.card {
+    background: #111827;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #1f2937;
 }
 
-.footer{
-    text-align:center;
-    margin-top:50px;
-    color:gray;
+.card h1 {
+    color: #dc2626;
+    font-size: 40px;
+    margin: 0;
 }
 
-.match-card{
-    background:#1f2937;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:10px;
-    border-left:5px solid #dc2626;
+.card p {
+    color: #9ca3af;
+    margin: 0;
 }
 
-.iframe-container{
-    position:relative;
-    padding-bottom:56.25%;
-    height:0;
-    overflow:hidden;
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #6b7280;
 }
 
-.iframe-container iframe{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    border-radius:10px;
+.match-card {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border-left: 5px solid #dc2626;
+}
+
+.iframe-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 
 </style>
